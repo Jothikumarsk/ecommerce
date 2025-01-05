@@ -40,7 +40,7 @@ RAZORPAY_KEY_ID = "your_key_id"
 RAZORPAY_KEY_SECRET = "your_key_secret"
 
 
-ALLOWED_HOSTS = ['shop.onrender.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://ecommerce-z0ow.onrender.com/','localhost', '127.0.0.1']
 
 
 # Application definition
