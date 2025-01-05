@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">Checkout</h1>
+<form id="razorpay-form" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="razorpay_order_id" value="{{ razorpay_order_id }}">
+    <input type="hidden" name="amount" value="{{ amount }}">
+    <input type="hidden" name="name" value="{{ request.session.order_data.name }}">
+    <input type="hidden" name="phone" value="{{ request.session.order_data.phone }}">
+    <input type="hidden" name="address" value="{{ request.session.order_data.address }}">
+
+    <!-- Razorpay Payment Button -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <button id="pay-button" type="button" class="btn btn-primary">Pay with Razorpay</button>
+</form>
+
+<script>
+    document.getElementById('pay-button').onclick = function(e) {
+        e.preventDefault();
+
+        const options = {
+            key: "{{ razorpay_key_id }}", // Razorpay Key ID
+            amount: "{{ amount|floatformat:2 }}", // Amount in INR
+            currency: "INR",
+            order_id: "{{ razorpay_order_id }}", // Razorpay Order ID
+            name: "E-commerce Store",
+            description: "UPI Payment",
+            handler: function (response) {
+                // Handle the success response
+                fetch('/payment-success/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Payment successful!');
+                        window.location.href = '/';
+                    } else {
+                        alert('Payment verification failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred during payment.');
+                });
+            },
+            theme: {
+                color: "#F37254"
+            }
+        };
+
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+    };
+</script>
+
+
+{% endblock %}

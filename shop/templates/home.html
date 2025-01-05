@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Welcome to Our E-commerce Store</h1>
+
+    <!-- Bootstrap Carousel -->
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            {% for product in products %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ product.image.url }}" class="d-block w-100" alt="{{ product.name }}" style="max-height: 400px; object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+                    <h5>{{ product.name }}</h5>
+                    <p>Price: ₹{{ product.price }}</p>
+                    <a href="/products/{{ product.id }}/" class="btn btn-primary">View Product</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<div class="text-center"><a href="/products/" class="btn btn-primary mt-4">Shop Now</a></div>
+{% endblock %}
+
