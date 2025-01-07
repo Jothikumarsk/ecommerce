@@ -134,3 +134,24 @@ def payment_success(request):
             return JsonResponse({'status': 'success', 'message': 'Payment successful!'})
         except SignatureVerificationError:
             return JsonResponse({'status': 'error', 'message': 'Payment verification failed!'})
+
+def terms_and_conditions(request):
+    context = {
+        'page_title': 'Terms & Conditions',
+        'content': 'These are the terms and conditions of our website...',
+    }
+    return render(request, 'policy.html', context)
+
+def privacy(request):
+    context = {
+        'page_title': 'Privacy Policy',
+        'content': 'These are the terms and conditions of our website...',
+    }
+    return render(request, 'privacy.html', context)
+
+def contactus(request):
+    context = {
+        'page_title': 'contact us',
+        'content': 'How to reach us...',
+    }
+    return render(request, 'contactus.html', context)

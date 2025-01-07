@@ -9,4 +9,9 @@ urlpatterns = [
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('payment-success/', views.payment_success, name='payment_success'),
+    path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
+    path('privacy-policy/', views.privacy, name='privacy_policy'),
+    path('contact-us/', views.contactus, name='Contact us'),
+    path('refund-policy/', views.terms_and_conditions, name='refund_policy'),
+    path('shipping-policy/', views.terms_and_conditions, name='shipping_policy'),
 ] 

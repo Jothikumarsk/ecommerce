@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ page_title }}</h1>
+<p>{{ content }}</p>
+<div class="container my-5">
+    <h1 class="text-center mb-4">Refund and Cancellation Policy</h1>
+    <div class="card shadow-sm p-4">
+        <h2 class="text-primary">Refund Policy</h2>
+        <p>We ensure a seamless refund process:</p>
+        <ul class="list-group">
+            <li class="list-group-item">Refund requests can be made within <strong>7 days</strong> of receiving the product.</li>
+            <li class="list-group-item">Refunds will be processed within <strong>7-10 business days</strong>.</li>
+            <li class="list-group-item">The refunded amount will be credited to your original payment method.</li>
+        </ul>
+    </div>
+    <div class="card shadow-sm p-4 mt-4">
+        <h2 class="text-primary">Cancellation Policy</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Orders can be canceled within <strong>24 hours</strong> of placement.</li>
+            <li class="list-group-item">Cancellations are not allowed for shipped products.</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
